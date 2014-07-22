@@ -1,0 +1,20 @@
+extends layout
+
+block content
+  h1= title
+
+  - if (result.is_dir)
+    - each content in result.contents
+      div
+        - if (content.is_dir)
+          i.fa.fa-lg.fa-folder-o
+        - else
+          i.fa.fa-lg.fa-file-o
+        a(href='/metadata#{content.path}') #{content.path}
+  - else
+    div
+      i.fa.fa-quote-left
+      span #{result.path.split('/').pop()}
+      i.fa.fa-quote-right
+
+  include include/logout
