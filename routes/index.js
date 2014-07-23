@@ -34,5 +34,17 @@ function metadata(req, res) {
   });
 }
 
+function download(req, res) {
+  if (Object.keys(req.params).length === 0) {
+    res.send(400);
+    return;
+  }
+  request.get({
+    uri: 'https://api-content.dropbox.com/1/files/auto/' + req.params[0],
+    headers: { Authorization: 'Bearer ' + req.session.passport.user.accessToken }
+  }).pipe(res);
+}
+
 exports.index = index;
 exports.metadata = metadata;
+exports.download = download;

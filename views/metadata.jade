@@ -3,6 +3,21 @@ extends layout
 block content
   h1= title
 
+  - var folders = result.path.split('/');
+  - if (result.is_dir)
+    - if (result.path === '/')
+      - folders.shift();
+  - else
+    - folders.pop();
+
+  - each folder in folders
+    div
+      i.fa.fa-lg.fa-folder-o
+      - if (folder === '')
+        a(href='/metadata') Dropbox
+      - else
+        a(href='/metadata/#{folder}') #{folder}
+
   - if (result.is_dir)
     - each content in result.contents
       div
@@ -10,11 +25,14 @@ block content
           i.fa.fa-lg.fa-folder-o
         - else
           i.fa.fa-lg.fa-file-o
-        a(href='/metadata#{content.path}') #{content.path}
+        a(href='/metadata/#{content.path.replace(/^\//, "")}') #{content.path.split('/').pop()}
   - else
     div
       i.fa.fa-quote-left
       span #{result.path.split('/').pop()}
       i.fa.fa-quote-right
+    div
+      i.fa.fa-lg.fa-download
+      a(href='/download/#{result.path.replace(/^\//, "")}') download
 
   include include/logout
