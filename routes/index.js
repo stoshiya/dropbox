@@ -30,7 +30,7 @@ function metadata(req, res) {
       return;
     }
     res.render('metadata', { title: TITLE, result: body });
-    console.log(new Date() - start + ' msec');
+    console.log(new Date() - start, ' msec');
   });
 }
 
@@ -45,6 +45,35 @@ function download(req, res) {
   }).pipe(res);
 }
 
+function search(req, res) {
+  if (typeof req.query.query === 'undefined') {
+    res.send(400);
+    return;
+  }
+  var query = req.query.query;
+  var path = req.query.path ? req.query.path : '';
+  var start = new Date();
+  request({
+    uri: 'https://api.dropbox.com/1/search/auto/' + path + '?query=' + query,
+    headers: { Authorization: 'Bearer ' + req.session.passport.user.accessToken },
+    json: true
+  }, function(err, response, body) {
+    if (err) {
+      console.error(err);
+      res.send(500);
+      return;
+    }
+    if (response.statusCode !== 200) {
+      console.error(response.statusCode);
+      res.send(500);
+      return;
+    }
+    res.render('search', { title: TITLE, result: body, query: query });
+    console.log(new Date() - start, ' msec');
+  });
+}
+
 exports.index = index;
 exports.metadata = metadata;
 exports.download = download;
+exports.search = search;

@@ -3,6 +3,8 @@ extends layout
 block content
   h1= title
 
+  include include/searchform
+
   - var folders = result.path.split('/');
   - if (result.is_dir)
     - if (result.path === '/')

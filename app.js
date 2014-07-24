@@ -74,6 +74,7 @@ router.get('/', routes.index);
 router.get('/metadata',   auth, routes.metadata);
 router.get('/metadata/*', auth, routes.metadata);
 router.get('/download/*', auth, routes.download);
+router.get('/search',     auth, routes.search);
 app.use('/', router);
 
 /// catch 404 and forward to error handler

@@ -14,11 +14,11 @@
     "debug": "^1.0.4",
     "express": "^4.6.1",
     "express-session": "^1.7.0",
-    "jade": "^1.4.2",
+    "jade": "^1.5.0",
     "morgan": "^1.2.0",
     "passport": "^0.2.0",
     "passport-dropbox-oauth2": "^0.1.6",
-    "request": "^2.38.0",
+    "request": "^2.39.0",
     "static-favicon": "^1.0.2"
   },
   "description": "web application for dropbox.com",
