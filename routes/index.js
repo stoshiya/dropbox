@@ -30,7 +30,7 @@ function metadata(req, res) {
       return;
     }
     res.render('metadata', { title: TITLE, result: body });
-    console.log(new Date() - start, ' msec');
+    console.log(new Date() - start + ' msec');
   });
 }
 
@@ -69,7 +69,7 @@ function search(req, res) {
       return;
     }
     res.render('search', { title: TITLE, result: body, query: query });
-    console.log(new Date() - start, ' msec');
+    console.log(new Date() - start + ' msec');
   });
 }
 
